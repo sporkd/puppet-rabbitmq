@@ -14,9 +14,11 @@ class Rabbitmq < Formula
     prefix.install Dir['*']
 
     # Replace the SYS_PREFIX for things like rabbitmq-plugins
-    inreplace((sbin + 'rabbitmq-defaults'), 'SYS_PREFIX=${RABBITMQ_HOME}', "SYS_PREFIX=#{HOMEBREW_PREFIX}")
+    inreplace sbin / 'rabbitmq-defaults' do |s|
+      s.gsub! 'SYS_PREFIX=${RABBITMQ_HOME}', "SYS_PREFIX=#{HOMEBREW_PREFIX}")
+      s.gsub! 'SASL_BOOT_FILE="${SYS_PREFIX}', "SASL_BOOT_FILE=\"#{prefix}"
+    end
 
-    # Set the RABBITMQ_HOME in rabbitmq-env
     inreplace((sbin + 'rabbitmq-env'), 'RABBITMQ_HOME="${SCRIPT_DIR}/.."', "RABBITMQ_HOME=#{prefix}")
   end
 end
