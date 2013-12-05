@@ -16,7 +16,7 @@ class rabbitmq {
   }
 
   file { $rabbitmq::config::configfile:
-    content => template('rabbitmq/rabbitmq.conf.erb'),
+    content => template('rabbitmq/rabbitmq.config.erb'),
     notify  => Service['dev.rabbitmq'],
   }
 

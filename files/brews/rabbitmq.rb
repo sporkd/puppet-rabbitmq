@@ -7,15 +7,14 @@ class Rabbitmq < Formula
 
   version '3.2.1-boxen1'
 
-  depends_on 'erlang'
-
   def install
     # Install the base files
     prefix.install Dir['*']
 
     # Replace the SYS_PREFIX for things like rabbitmq-plugins
     inreplace sbin / 'rabbitmq-defaults' do |s|
-      s.gsub! 'SYS_PREFIX=${RABBITMQ_HOME}', "SYS_PREFIX=#{HOMEBREW_PREFIX}")
+      s.gsub! 'SYS_PREFIX=${RABBITMQ_HOME}', "SYS_PREFIX=#{HOMEBREW_PREFIX}"
+      s.gsub! 'CLEAN_BOOT_FILE="${SYS_PREFIX}', "CLEAN_BOOT_FILE=\"#{prefix}"
       s.gsub! 'SASL_BOOT_FILE="${SYS_PREFIX}', "SASL_BOOT_FILE=\"#{prefix}"
     end
 
