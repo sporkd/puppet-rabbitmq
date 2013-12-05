@@ -15,14 +15,14 @@ define rabbitmq::user(
 
   if $ensure == 'present' {
     exec { "create rabbitmq user ${name}":
-      command => "${rabbitmq::config::rabbitmqctl} add_user ${name}",
+      command => "${rabbitmq::config::rabbitmqctl} add_user ${name} ${password}",
       unless  => "${rabbitmq::config::rabbitmqctl} list_users | grep -w ${name}",
       require => Service['dev.rabbitmq']
     }
   }
   elsif $ensure == 'absent' {
     exec { "delete rabbitmq user ${name}":
-      command => "${rabbitmq::config::rabbitmqctl} add_user ${name}",
+      command => "${rabbitmq::config::rabbitmqctl} delete_user ${name}",
       onlyif  => "${rabbitmq::config::rabbitmqctl} list_users | grep -w ${name}",
       require => Service['dev.rabbitmq']
     }
