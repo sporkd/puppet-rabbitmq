@@ -19,7 +19,7 @@ define rabbitmq::user(
       command => [
         "${rabbitmq::config::rabbitmqctl} add_user ${name} ${password}",
         "${rabbitmq::config::rabbitmqctl} set_user_tags ${name} administrator",
-      ],
+      ].join(" && "),
       unless  => "${rabbitmq::config::rabbitmqctl} list_users | grep -w ${name}",
       require => Service['dev.rabbitmq']
     }

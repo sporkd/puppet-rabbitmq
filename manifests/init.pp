@@ -60,4 +60,6 @@ class rabbitmq {
     before => Service['dev.rabbitmq'],
     enable => false
   }
+
+  rabbitmq::user { 'guest': password => 'guest' }
 }
