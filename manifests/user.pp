@@ -16,10 +16,7 @@ define rabbitmq::user(
 
   if $ensure == 'present' {
     exec { "create rabbitmq user ${name}":
-      command => [
-        "${rabbitmq::config::rabbitmqctl} add_user ${name} ${password}",
-        "${rabbitmq::config::rabbitmqctl} set_user_tags ${name} administrator",
-      ].join(" && "),
+      command => "${rabbitmq::config::rabbitmqctl} add_user ${name} ${password} && ${rabbitmq::config::rabbitmqctl} set_user_tags ${name} administrator",
       unless  => "${rabbitmq::config::rabbitmqctl} list_users | grep -w ${name}",
       require => Service['dev.rabbitmq']
     }
