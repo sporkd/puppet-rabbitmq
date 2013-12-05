@@ -8,7 +8,7 @@
 define rabbitmq::vhost($ensure = present) {
   require rabbitmq
 
-  $rabbitmqctl = "$::boxen_home/sbin/rabbitmqctl"
+  $rabbitmqctl = "$::boxen_home/homebrew/sbin/rabbitmqctl"
 
   if $ensure == 'present' {
     exec { "create rabbitmq vhost ${name}":
