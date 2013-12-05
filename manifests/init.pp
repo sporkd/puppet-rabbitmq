@@ -70,6 +70,4 @@ class rabbitmq {
     timeout     => 30,
     refreshonly => true
   }
-
-  rabbitmq::user { 'guest': password => 'guest' }
 }
