@@ -1,5 +1,5 @@
-# Full RabbitMQ stack, including service management.
 #
+# Full RabbitMQ stack, including service management.
 # Usage:
 #
 #     include rabbitmq
@@ -34,7 +34,7 @@ class rabbitmq {
   }
 
   package { 'boxen/brews/rabbitmq':
-    ensure => '3.1.5-boxen1',
+    ensure => '3.2.1-boxen1',
     notify => Service['dev.rabbitmq'],
   }
 
