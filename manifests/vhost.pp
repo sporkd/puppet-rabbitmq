@@ -13,14 +13,14 @@ define rabbitmq::vhost($ensure = present) {
     exec { "create rabbitmq vhost ${name}":
       command => "${rabbitmq::config::rabbitmqctl} add_vhost ${name}",
       unless  => "${rabbitmq::config::rabbitmqctl} list_vhosts | grep -w ${name}",
-      require => Service['dev.rabbitmq']
+      require => Exec['wait-for-rabbitmq']
     }
   }
   elsif $ensure == 'absent' {
     exec { "delete rabbitmq vhost ${name}":
       command => "${rabbitmq::config::rabbitmqctl} delete_vhost ${name}",
       onlyif  => "${rabbitmq::config::rabbitmqctl} list_vhosts | grep -w ${name}",
-      require => Service['dev.rabbitmq']
+      require => Exec['wait-for-rabbitmq']
     }
   }
 }

@@ -53,12 +53,22 @@ class rabbitmq {
   }
 
   service { 'dev.rabbitmq':
-    ensure  => running
+    ensure  => running,
+    notify  => Exec['wait-for-rabbitmq']
   }
 
   service { 'com.boxen.rabbitmq': # replaced by dev.rabbitmq
     before => Service['dev.rabbitmq'],
     enable => false
+  }
+
+  $nc = "/usr/bin/nc -z localhost ${rabbitmq::config::port}"
+
+  exec { 'wait-for-rabbitmq':
+    command     => "while ! ${nc}; do sleep 1; done",
+    provider    => "shell",
+    timeout     => 30,
+    refreshonly => true
   }
 
   rabbitmq::user { 'guest': password => 'guest' }
