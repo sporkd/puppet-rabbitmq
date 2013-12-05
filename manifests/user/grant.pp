@@ -1,4 +1,5 @@
 define rabbitmq::user::grant(
+  $user,
   $vhost,
   $ensure      = 'present',
   $permissions = '".*" ".*" ".*"'
