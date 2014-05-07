@@ -2,10 +2,10 @@ require 'formula'
 
 class Rabbitmq < Formula
   homepage 'http://rabbitmq.org/'
-  url 'http://www.rabbitmq.com/releases/rabbitmq-server/v3.3.0/rabbitmq-server-mac-standalone-3.3.0.tar.gz'
-  sha1 '1c30c30cae5c59e10100d2b034cfa6769198a140'
+  url 'http://www.rabbitmq.com/releases/rabbitmq-server/v3.3.1/rabbitmq-server-mac-standalone-3.3.1.tar.gz'
+  sha1 'e3108fe7869971bcb86e42771caee85a43d9f0ec'
 
-  version '3.3.0-boxen1'
+  version '3.3.1-boxen1'
 
   def install
     # Install the base files
