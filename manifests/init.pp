@@ -25,7 +25,7 @@ class rabbitmq {
     notify  => Service['dev.rabbitmq'],
   }
 
-  file { "${boxen::config::envdir}/rabbitmq.sh":
+  boxen::env_script { 'rabbitmq':
     content  => template('rabbitmq/env.sh.erb'),
     priority => 'lower'
   }
