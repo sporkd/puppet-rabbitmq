@@ -26,7 +26,8 @@ class rabbitmq {
   }
 
   file { "${boxen::config::envdir}/rabbitmq.sh":
-    content => template('rabbitmq/env.sh.erb')
+    content  => template('rabbitmq/env.sh.erb'),
+    priority => 'lower'
   }
 
   homebrew::formula { 'rabbitmq':
