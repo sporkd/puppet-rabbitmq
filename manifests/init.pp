@@ -25,8 +25,9 @@ class rabbitmq {
     notify  => Service['dev.rabbitmq'],
   }
 
-  file { "${boxen::config::envdir}/rabbitmq.sh":
-    content => template('rabbitmq/env.sh.erb')
+  boxen::env_script { 'rabbitmq':
+    content  => template('rabbitmq/env.sh.erb'),
+    priority => 'lower'
   }
 
   homebrew::formula { 'rabbitmq':
@@ -34,7 +35,7 @@ class rabbitmq {
   }
 
   package { 'boxen/brews/rabbitmq':
-    ensure => '3.2.1-boxen1',
+    ensure => '3.4.4-boxen1',
     notify => Service['dev.rabbitmq'],
   }
 
